@@ -16,7 +16,7 @@ const handleSubmit = async (e) => {
   setStatus("Sending your message...");
   try {
     // This line sends the data to your server
-    const res = await axios.post('https://portfolio-backend-zqna.onrender.com', formData);
+const res = await axios.post('https://portfolio-backend-zqna.onrender.com/api/contact', formData);
     if(res.data.success) {
       setStatus('Message Sent Successfully! 🚀');
       setFormData({ name: '', email: '', message: '' }); // Clear form
