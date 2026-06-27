@@ -5,64 +5,81 @@ import { FaLinkedin, FaGithub } from 'react-icons/fa'
 
 const Hero = () => {
   return (
-    <section className='min-h-[80vh] flex flex-col md:flex-row justify-between items-center px-10 md:px-20 py-10 bg-white dark:bg-slate-900'>
+    <section className='relative min-h-[85vh] flex flex-col md:flex-row justify-between items-center px-6 sm:px-12 md:px-20 py-16 md:py-24 bg-dark-bg overflow-hidden transition-colors duration-300'>
+      
+      {/* Background Orbs */}
+      <div className='absolute -top-40 -left-40 w-96 h-96 rounded-full bg-indigo-500/10 blur-3xl animate-pulse-slow'></div>
+      <div className='absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-purple-500/10 blur-3xl animate-pulse-slow'></div>
+      
+      {/* Decorative Grid Lines */}
+      <div className='absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none'></div>
 
-        {/* left content */}
-        <div className='md:w-1/2 space-y-10'>
-            <h2 className='text-indigo-600 font-semibold tracking-wide uppercase text-sm'>
-                Available For Internship 2026
-            </h2>
+      {/* Left Content */}
+      <div className='md:w-1/2 space-y-8 z-10 text-center md:text-left flex flex-col items-center md:items-start'>
+        
+        {/* Status Badge */}
+        <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-bold uppercase tracking-widest text-[11px] shadow-sm select-none'>
+          <span className='w-2 h-2 rounded-full bg-emerald-400 animate-ping'></span>
+          Available For Internship 2026
+        </div>
 
-            <h1 className='text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white leading-tight'>
-                Hey, I'm <span className='text-indigo-700'>Asmit Prajapati</span>
-            </h1>
-            <p className='text-lg text-slate-600 dark:text-slate-400 max-w-lg'>
-                A Full-Stack Developer and B.Tech CSE student specializing in the MERN stack.
-                I build scalable web applications like <span className='font-medium text-slate-800 dark:text-slate-200'>Sahyata SOS</span> and explore Cyber Security.
+        {/* Hero Headline */}
+        <h1 className='text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-tight tracking-tight'>
+          Hey, I'm <span className='text-gradient font-black'>Asmit Prajapati</span>
+        </h1>
+        
+        {/* Hero Paragraph */}
+        <p className='text-base sm:text-lg md:text-xl text-slate-400 max-w-lg leading-relaxed font-sans'>
+          A Full-Stack Developer and B.Tech CSE student specializing in the MERN stack.
+          I build scalable web applications like <span className='font-medium text-slate-200 border-b border-indigo-500/30 pb-0.5'>Sahyata SOS</span> and explore Cyber Security.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className='flex flex-col sm:flex-row flex-wrap gap-4 pt-4 w-full justify-center md:justify-start'>
+          <button className='bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:-translate-y-0.5 active:translate-y-0 text-center cursor-pointer'>
+            View Projects
+          </button>
+
+          {/* LinkedIn Button */}
+          <a 
+            href="https://www.linkedin.com/in/asmit-prajapati-a55177316" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className='border border-white/10 hover:border-indigo-500/50 bg-white/5 hover:bg-white/10 px-6 py-3.5 rounded-xl font-semibold text-white transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-black/10'
+          >
+            LinkedIn <FaLinkedin className='text-xl text-indigo-400' />
+          </a>
+
+          {/* Github Button*/}
+          <a 
+            href="https://github.com/asmitprajapati52" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className='border border-white/10 hover:border-purple-500/50 bg-white/5 hover:bg-white/10 px-6 py-3.5 rounded-xl font-semibold text-white transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-black/10'
+          >
+            Github <FaGithub className='text-xl text-purple-400' />
+          </a>
+        </div>
+      </div>
+
+      {/* Right Content */}
+      <div className='md:w-1/2 mt-16 md:mt-0 flex justify-center z-10 w-full'>
+        {/* Antigravity floating card */}
+        <div className='relative w-64 h-64 md:w-80 md:h-80 bg-indigo-950/20 rounded-2xl rotate-3 flex items-center justify-center border border-white/10 overflow-hidden shadow-2xl shadow-black/60 backdrop-blur-sm animate-float-slow'>
+          <img 
+            src={profilePic} 
+            alt="Asmit Prajapati" 
+            className='w-full h-full object-cover -rotate-3 scale-110' 
+          />
+          {/* Accent border glow effect overlay */}
+          <div className='absolute inset-0 border border-white/15 rounded-2xl pointer-events-none'></div>
+          <div className='absolute bottom-4 right-4 bg-slate-950/80 backdrop-blur-md px-4 py-1.5 rounded-lg border border-indigo-500/30 -rotate-3 shadow-lg'>
+            <p className='font-mono text-xs font-extrabold text-indigo-400 tracking-wide'>
+              &lt;Code /&gt; &amp; Security
             </p>
-
-            <div className='flex flex-wrap gap-4 pt-4'>
-                <button className='bg-indigo-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-800 transition-all shadow-xl shadow-indigo-200'>
-                    View Projects
-                </button>
-
-                {/* LinkedIn Button */}
-                <a 
-                    href="https://www.linkedin.com/in/asmit-prajapati-a55177316" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className='border-2 border-slate-200 dark:border-slate-700 px-6 py-3 rounded-lg font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 dark:text-white transition-all flex items-center gap-2'
-                >
-                    LinkedIn <FaLinkedin className='text-xl' />
-                </a>
-
-                {/* Github Button*/}
-                <a 
-                    href="https://github.com/asmitprajapati52" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className='border-2 border-slate-500 dark:border-slate-700 px-6 py-3 rounded-lg font-semibold hover:bg-slate-800 hover:text-white dark:text-white dark:hover:bg-slate-200 dark:hover:text-black transition-all flex items-center gap-2'
-                >
-                    Github <FaGithub className='text-xl' />
-                </a>
-            </div>
+          </div>
         </div>
-
-        {/* Right Content */}
-        <div className='md:w-1/2 mt-12 md:mt-0 flex justify-center'>
-            <div className='relative w-64 h-64 md:w-80 md:h-80 bg-indigo-100 rounded-2xl rotate-3 flex items-center justify-center border-2 border-indigo-700 overflow-hidden shadow-2xl'>
-                <img 
-                    src={profilePic} 
-                    alt="Asmit Prajapati" 
-                    className='w-full h-full object-cover -rotate-3 scale-110' 
-                />
-                <div className='absolute bottom-4 right-4 bg-white/90 dark:bg-slate-900/90 px-3 py-1 rounded-lg border border-indigo-700 -rotate-3 shadow-lg'>
-                    <p className='font-mono text-xs font-bold text-indigo-700'>
-                        &lt;Code /&gt; &amp; Security
-                    </p>
-                </div>
-            </div>
-        </div>
+      </div>
     </section>
   )
 }

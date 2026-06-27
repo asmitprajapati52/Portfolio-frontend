@@ -9,7 +9,7 @@ import Hero from './components/Hero'
 
 const App = () => {
   return (
-    <div className='min-h-screen w-screen bg-black text-xl text-white'>
+    <div className='min-h-screen w-full bg-dark-bg text-slate-100 font-sans antialiased overflow-x-hidden'>
       <Navbar/>
       <main>
         <Routes>
