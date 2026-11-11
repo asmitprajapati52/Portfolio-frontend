@@ -6,6 +6,17 @@ import Projects from './pages/Projects'
 import Skills from './pages/Skills'
 import Contact from './pages/Contact'
 import Hero from './components/Hero'
+import Experience from './components/Experience'
+
+const HomePage = () => {
+  return (
+    <>
+      <Hero />
+      <Experience />
+      <Skills />
+    </>
+  );
+};
 
 const App = () => {
   return (
@@ -13,12 +24,11 @@ const App = () => {
       <Navbar/>
       <main>
         <Routes>
-          <Route path="/" element={<Hero/>} />
-          <Route path='/' element={<About/>}/>
+          <Route path="/" element={<HomePage />} />
           <Route path='/projects' element={<Projects/>}/>
           <Route path='/skills' element={<Skills/>}/>
           <Route path='/contact' element={<Contact/>}/>
-          <Route path='*' element={<div className='p-20'>404 - Not Found</div>}/>
+          <Route path='*' element={<div className='p-20 text-center'>404 - Not Found</div>}/>
         </Routes>
       </main>
     </div>

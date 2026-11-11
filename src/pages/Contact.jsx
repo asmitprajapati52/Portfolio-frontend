@@ -1,32 +1,65 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // 1. Import Axios
+import axios from 'axios';
+
+// Backend API URL: uses Vite environment variable, falls back to deployed server or localhost
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-backend-zqna.onrender.com';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [loading, setLoading] = useState(false);
-    const [status, setStatus] = useState(''); // To show "Sending..." or "Success"
+  const [status, setStatus] = useState(''); // Status message
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  setStatus("Sending your message...");
-  try {
-    // This line sends the data to your server
-const res = await axios.post('https://portfolio-backend-zqna.onrender.com/api/contact', formData);
-    if(res.data.success) {
-      setStatus('Message Sent Successfully! 🚀');
-      setFormData({ name: '', email: '', message: '' }); // Clear form
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Client-side validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.name.trim()) {
+      setStatus('Please enter your name. ❌');
+      return;
     }
-  } catch (err) {
-    setStatus('Something went wrong. Please try again. ❌');
-  }finally {
-    setLoading(false);
-  }
-};
+    if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
+      setStatus('Please enter a valid email address. ❌');
+      return;
+    }
+    if (!formData.subject.trim()) {
+      setStatus('Please enter a subject. ❌');
+      return;
+    }
+    if (!formData.message.trim()) {
+      setStatus('Please enter your message. ❌');
+      return;
+    }
+
+    setLoading(true);
+    setStatus("Sending your message...");
+
+    try {
+      // Dispatches request to the backend contact API
+      const res = await axios.post(`${API_BASE_URL}/api/contact`, {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        subject: formData.subject.trim(),
+        message: formData.message.trim(),
+      });
+
+      if (res.data && res.data.success) {
+        setStatus(res.data.message || 'Message Sent Successfully! 🚀');
+        setFormData({ name: '', email: '', subject: '', message: '' }); // Clear form
+      } else {
+        setStatus(res.data?.message || 'Something went wrong. Please try again. ❌');
+      }
+    } catch (err) {
+      const serverMessage = err.response?.data?.message;
+      setStatus(serverMessage || 'Something went wrong. Please try again. ❌');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section id='contact' className='relative py-20 px-6 md:px-20 bg-dark-bg transition-colors duration-300 overflow-hidden'>
@@ -106,8 +139,21 @@ const res = await axios.post('https://portfolio-backend-zqna.onrender.com/api/co
               </div>
 
               <div>
+                <label className='block text-sm font-semibold text-slate-300 mb-2 font-sans'>Subject</label>
+                <input 
+                  type="text" 
+                  name='subject' 
+                  required 
+                  value={formData.subject}
+                  className='w-full px-4 py-3.5 rounded-xl border border-white/10 bg-slate-950/40 text-white placeholder-slate-500 focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 outline-none transition-all duration-300 font-sans'
+                  onChange={handleChange}
+                  placeholder='Summer Internship 2026 / Project Inquiry'
+                />
+              </div>
+
+              <div>
                 <label className='block text-sm font-semibold text-slate-300 mb-2 font-sans'>Message</label>
-                <textarea
+                <textarea 
                   name="message" 
                   rows='4' 
                   required 
@@ -140,7 +186,7 @@ const res = await axios.post('https://portfolio-backend-zqna.onrender.com/api/co
         </div>
       </div>
     </section>
-  )
+  );
 };
 
-export default Contact
+export default Contact;
