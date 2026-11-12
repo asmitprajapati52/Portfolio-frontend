@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import { Route, Routes } from 'react-router-dom'
 import About from './pages/About'
 import Projects from './pages/Projects'
@@ -20,9 +21,9 @@ const HomePage = () => {
 
 const App = () => {
   return (
-    <div className='min-h-screen w-full bg-dark-bg text-slate-100 font-sans antialiased overflow-x-hidden'>
+    <div className='min-h-screen w-full bg-dark-bg text-slate-100 font-sans antialiased overflow-x-hidden flex flex-col justify-between'>
       <Navbar/>
-      <main>
+      <main className='flex-grow'>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path='/projects' element={<Projects/>}/>
@@ -31,6 +32,7 @@ const App = () => {
           <Route path='*' element={<div className='p-20 text-center'>404 - Not Found</div>}/>
         </Routes>
       </main>
+      <Footer />
     </div>
   )
 }
